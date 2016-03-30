@@ -1,0 +1,134 @@
+\documentclass[10pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{bm,amssymb,mathrsfs}
+\usepackage{scrextend}
+
+
+\setlength{\mathindent}{0.0cm}
+
+\def\yields{\hskip 5 pt $\to$ \hskip 5 pt}
+\newcommand{\bs}[1]{\pmb{#1}}
+\newcommand{\parfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+
+\title{Cracking the Coding Interview -- STUDY GUIDE}
+\author{by {\bf reah miyara} }%\& {\bf david scherban}}
+\date{march 28, 2016}
+\maketitle
+
+\section{Programming Paradigms}\smallskip
+
+\paragraph{Object Oriented}\ \\
+In object oriented languages {\bf data and methods of manipulating the data are kept as a single unit called an object}. The only way a user can access the data is via object's methods. Therefore the inner workings of an object may be changed without affecting any code that uses the object. 
+\begin{addmargin}[3em]{2em}% 1em left, 2em right
+
+{\indent \vspace{-10pt} \paragraph{Polymorphism}\ \\
+ Providing or supplying a single interface to be used with entities of different types. }
+\end{addmargin}
+
+\paragraph{Declarative}\ \\
+In declarative languages the computer is told {\bf what the problem is, not how to solve the problem} --the program is structured as a collection of properties to find in the expected result, not as a procedure to follow. It's a style of expressing the logic of a computation without describing its control flow. This is in {\bf contrast with imperative programming}, which implements algorithms in explicit steps. {\it Given a database or a set of rules, the computer tries to find a solution matching all the desired properties., e.g. SQL}
+
+\paragraph{Imperative}\ \\
+Imperative programming focuses on {\bf how a program operates}, consisting of commands for the computer to perform. This {\bf contrasts declarative programming}.
+
+\paragraph{Functional}\ \\
+Functional programming is a {\bf subset of declarative programming}. Programs are written using functions, {\it blocks of code intended to behave like mathematical functions}. Functional languages discourage changes in the value of variables through assignment.   
+
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+
+\paragraph{Properties of supremum and infimum}\ \\
+Let $h$ be a given positive number and let $S$ be a set of real numbers.\\ 
+(a) If $S$ has a supremum, then for some $x$ in $S$ we have $x > \sup S - h$.\\
+(b) If $S$ has an infimum, then for some $x$ in $S$ we have $x < \inf S + h$.
+
+\paragraph{Well-ordering principle}\ \\
+Every nonempty set of positive integers contains a smallest member.
+
+\paragraph{Triangle inequality}\ \\
+For arbitrary real numbers $x$ and $y$, 
+$|x + y| \leq |x| + |y|.$
+More generally, for arbitrary real numbers $a_1$, $a_2$, \ldots, $a_n$, we have
+$\left|\sum_{k=1}^n a_k\right| \leq \sum_{k=1}^n |a_k|.$
+
+\paragraph{The Cauchy-Schwarz inequality}\ \\
+If $a_1, \ldots, a_n$ and $b_1, \ldots, b_n$ are arbitrary real numbers, we have
+$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$.
+The equality sign holds if and only if there is a real number $x$ such that $a_k x + b_k = 0$
+for each $k = 1, 2, \ldots, n$.
+
+
+
+\bigskip\bigskip
+\section{Complex Field}\smallskip
+
+\paragraph{Field properties}\ \\
+$(a,b)=(c,d)$ means $a=c$ and $b=d$\\
+$(a,b)+(c,d)=(a+c,b+d)$\\
+$(a,b)(c,d)=(ac-bd,ad+bc)$
+$x+y=y+x$\\
+$x+(y+z)=(z+y)+z$\\
+$x(y+z)=xy+xz$\\
+$e^{z+2n\pi i}=e^z$
+
+\begin{addmargin}[3em]{2em}% 1em left, 2em right
+
+{\indent \paragraph{Polar coordinates}\ \\
+$x = r \cos \theta$ \hskip 10 pt $y = r \sin \theta$\\
+$r$ is the modulus or absolute value of $(x,y)$, equal to $\sqrt{x^2+y^2}$.\\
+$\theta$ is the angle between $(x,y)$ and the x-axis, and is called the argument of $(x,y)$,
+or the principal argument if $-\pi < \theta \leq \pi$.\\
+Polar form of $z$: Every complex number $z \neq 0$ can be expressed as $z=re^{i\theta}$.}
+
+\end{addmargin}
+
+
+\paragraph{Complex exponential}\ \\
+If $z=(x,y)$, then $e^z = e^x(\cos y + i \sin y)$\\
+$e^ae^b=e^{a+b}$
+
+\paragraph{Derivatives and integrals}\ \\
+If $f=u+iv$, then $f'(x)=u'(x)+iv'(x)$\\
+$\int_a^bf(x)\,dx=\int_a^bu(x)\,dx+i\int_a^bv(x)\,dx$\\
+$(e^{tx})'=te^{tx}$\\
+$\int e^{tx}\,dx=\frac{e^{tx}}{t}$
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
