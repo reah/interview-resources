@@ -1,9 +1,32 @@
 \documentclass[10pt]{article}
 \usepackage[margin=2cm]{geometry}
 \usepackage[fleqn]{amsmath}
+\usepackage[T1]{fontenc}
 \usepackage{bm,amssymb,mathrsfs}
 \usepackage{scrextend}
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{color}
 
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.83,0.83,0.83}
+\def\code#1{\colorbox{pgrey}{\texttt{#1}}}
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
 
 \setlength{\mathindent}{0.0cm}
 
@@ -16,8 +39,8 @@
 \setcounter{secnumdepth}{-1}
 
 \title{Cracking the Coding Interview -- STUDY GUIDE}
-\author{by {\bf reah miyara} }%\& {\bf david scherban}}
-\date{march 28, 2016}
+\author{by {\bf reah miyara} }
+\date{\today}
 \maketitle
 
 \section{Programming Paradigms}\smallskip
@@ -39,7 +62,43 @@ Imperative programming focuses on {\bf how a program operates}, consisting of co
 \paragraph{Functional}\ \\
 Functional programming is a {\bf subset of declarative programming}. Programs are written using functions, {\it blocks of code intended to behave like mathematical functions}. Functional languages discourage changes in the value of variables through assignment.   
 
+\section{Arrays \& Strings}\smallskip
+\begin{enumerate}
+
+\item {\bf Determine if string has unique characters; without additional data structures.}
+
+\begin{itemize}
+\item split up characters from string \code{chars[] = str.toCharArray();}
+\item get single character from string \code{char c = str.charAt(i);}
+\item cast char to int, \code{int value = str.charAt(i);} , (this is because the primitive char datatype is a 16 bit unsigned integer)
+\item shift 1 by the int casted from the char \&\& with a checker 0, if result isn't 0 then not unique, if it is checker |= result
+\end{itemize}
+
+\item {\bf Reverse a String}
+
+\begin{itemize}
+\item 
+\end{itemize}
+\end{enumerate}
+
+
+
+
+
+
+\newpage
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+code input sample
+\begin{lstlisting}[frame=single]
+public class isUnique {
+	public static boolean isUnique(String s) {
+		// hello world
+		HashMap <Character, Boolean>  charMap = new HashMap<Character, Boolean>();
+	return true;
+	}
+}
+\end{lstlisting}
 
 
 \paragraph{Properties of supremum and infimum}\ \\
