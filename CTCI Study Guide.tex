@@ -7,12 +7,19 @@
 \usepackage{listings}
 \usepackage{inconsolata}
 \usepackage{color}
+\usepackage{xcolor}
+\usepackage{collectbox}
+%\usepackage{courier}
 
 \definecolor{pblue}{rgb}{0.13,0.13,1}
 \definecolor{pgreen}{rgb}{0,0.5,0}
 \definecolor{pred}{rgb}{0.9,0,0}
 \definecolor{pgrey}{rgb}{0.83,0.83,0.83}
-\def\code#1{\colorbox{pgrey}{\texttt{#1}}}
+%\def\code#1{\colorbox{white}{\texttt{#1}}}
+
+\newcommand{\code}[1]{%
+    {\fcolorbox{black}{pgrey}{\texttt{#1}}}
+}
 
 \lstset{language=Java,
   showspaces=false,
@@ -26,6 +33,13 @@
   basicstyle=\ttfamily,
   moredelim=[il][\textcolor{pgrey}]{$$},
   moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\newcommand{\mybox}{%
+    \collectbox{%
+        \setlength{\fboxsep}{1.5pt}%
+        \fbox{\BOXCONTENT}%
+    }%
 }
 
 \setlength{\mathindent}{0.0cm}
@@ -44,7 +58,6 @@
 \maketitle
 
 \section{Programming Paradigms}\smallskip
-
 \paragraph{Object Oriented}\ \\
 In object oriented languages {\bf data and methods of manipulating the data are kept as a single unit called an object}. The only way a user can access the data is via object's methods. Therefore the inner workings of an object may be changed without affecting any code that uses the object. 
 \begin{addmargin}[3em]{2em}% 1em left, 2em right
@@ -77,12 +90,53 @@ Functional programming is a {\bf subset of declarative programming}. Programs ar
 \item {\bf Reverse a String}
 
 \begin{itemize}
-\item 
+\item Strings are immutable so use StringBuffer, {\it (mutable, stored on the heap, each method is thread safe, synchronized)}, or StringBuilder, {\it (same methods as StringBuffer but not synchronized, hence not thread safe)}, and finalize the string using \code{StringBuilder.toString()}
+\item method 1: copy backwards into StringBuffer linearly \\\code{for (int i = s.length()-1; i >= 0; i--) \{ sb.append(s.charAt(i)); \} return sb.toString();} 
+\item method 2 (in place): turn string into char array \\\code{char[] reverse = s.toCharArray(); } and concurrently swap last and first chars until reach the middle \\
+\code{for(int i = 0, j = s.length()-1; i < s.length()/2; i++, j--) \{}\\\code{char temp = reverse[i]; reverse[i] = reverse[j]; reverse[j] = temp;} \\\code{\} return new String(reverse);}
+\item method 3: \code{return new StringBuilder(s).reverse().toString();}
 \end{itemize}
+
+\item {\bf Given 2 strings write a method to determine if one is a permutation of the other}
+
+\begin{itemize}
+\item check to see if lengths are the same \code{if(s1.length() != s2.length()) return false;}
+\item method 1, sort O(nlogn): convert each string to an array of chars\\\code{char[] chars = s.toCharArray();} sort each in place \code{Arrays.sort(chars);} compare using  \\\code{Objects.equals(chars1, chars2);} which checks for \code{null} unlike \code{s1.equals(s2);}
+\item initialize array of ints, if unicode, or hashmap otherwise to keep count of chars in s1. \\\code{int[] charCount = new int[128];} or \code{HashMap<Character, Integer> charCount = HashMap<C,I>();}
+\item iterate over first string incrementing count for char \\\code{for(int i = 0; i < s1.length(); i++) \{}
+\\\code{charCount[s1.charAt(i)]++;\}} or \\\code{if(map.get(s1.charAt(i) != null) \{ map.put(s1.charAt(i), map.get(s1.charAt(i)) + 1); \}}
+\\\code{else \{ map.put(s1.charAt(i), 1); \}}
+\item iterate over second string decrementing count for char, returning false if count falls below 0 
+\\\code{for(int i = 0; i < s2.length(); i++) \{ if(--charCount[s2.charAt(i)] < 0) return false; \}} or  
+\\\code{if(charCount.get(s2.charAt(i)) == null || (charCount.get(s2.charAt(i)) - 1 < 0)) \{ return false; \} }
+\\\code{\} else \{ charCount.put(s2.charAt(i), charCount.get(s2.charAt(i)) - 1); \}}
+\end{itemize}
+
+\item {\bf Write a method to replace all spaces in a string with \lq \textnormal{\%20}\rq}
+\begin{itemize} 
+\item method 1, StringBuffer: create a StringBuffer object, convert String to char array, append each char that does not equal \lq\hspace{3pt}\rq\hspace{1pt}  to the StringBuffer otherwise append \lq{\textnormal\%20}\rq
+\item method 2, using only primitive types: count the spaces in the String, calculate new size of char array needed to contain new string, copy each char if not  \lq\hspace{3pt}\rq\hspace{1pt}, otherwise \lq{\textnormal\%20}\rq by using a second iterator {\textnormal j}
+\\\code{int newSize = s.length() + spaceCount * 2; char[] modified = new char[newSize];}
+\item method 3, given char[] that can fit new string and true length of original string: calculate new size of string again by first counting spaces \code{int index = s.length + spaceCount * 2 - 1;} 
+\\now in order to not overwrite original characters when replacing \lq\hspace{3pt}\rq\hspace{1pt}, insert each char backwards with the index calculated and true length given, finally returning new string
+\begin{lstlisting}[frame=single]
+for(int i = length; i >=0; i--) {
+	if(s[i] == ' ') {
+		s[index--] = '0';
+		s[index--] = '2';
+		s[index--] = '%';
+	} else {
+		s[index--] = s[i];
+	}
+}
+return new String(s);
+\end{lstlisting}\end{itemize}
 \end{enumerate}
 
+\section{General Java Knowledge}\smallskip
 
-
+\paragraph{Unicode}\ \\
+Java inherently supports unicode, encoding standard which contains 128 different characters, for char primitive types. 
 
 
 
